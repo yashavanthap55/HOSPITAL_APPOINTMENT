@@ -1,11 +1,14 @@
-import React,{ createContext } from "react";
+import React,{ createContext, useState } from "react";
 import { doctors } from "../assets/assets_frontend/assets";
 
 export const Appcontext = createContext();
 
 const AppContextProvider = (props) => {
+  const [islogin,Setislogin]=useState(false);
   const val = {
     doctors,
+    islogin,
+    Setislogin
   };
 
   return (

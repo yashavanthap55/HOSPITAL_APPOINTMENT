@@ -65,7 +65,7 @@ li{
     text-decoration: none;
     background-position: 0px 100%;
     background-size: 0% 0.2em;
-
+    display: block  ;
 }
 .prof a{
  text-decoration: none;

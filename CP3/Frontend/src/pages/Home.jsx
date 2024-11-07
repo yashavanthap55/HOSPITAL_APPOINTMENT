@@ -1,4 +1,4 @@
-import React, { useEffect, useRef,useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import './../styles/Home.css';
 import tree from './../assets/tree.js';
 import gsap from 'gsap';
@@ -6,6 +6,7 @@ import MRI from '../components/MRI.jsx';
 import Location from '../components/Location.jsx';
 import Footer from './../components/footer.jsx';
 import Createacc from '../components/createacc.jsx';
+import { Appcontext } from '../context/Appcontext';
 
 const Home = () => {
   const homeRef = useRef(null);
@@ -17,16 +18,13 @@ const Home = () => {
   const textRef3 = useRef(null);
   const textRef4 = useRef(null);  
   const cursorRef = useRef(null);
-
   const [scaleCursor, setScaleCursor] = useState(false);
+
+  const { islogin, Setislogin } = useContext(Appcontext);
 
   useEffect(() => {
     if (firstBranchRef.current) {
-      gsap.fromTo(
-        firstBranchRef.current,
-        { rotation: 120 },
-        { rotation: 70, duration: 2 }
-      );
+      gsap.fromTo(firstBranchRef.current, { rotation: 120 }, { rotation: 70, duration: 2 });
     }
 
     if (secondBranchRef.current) {
@@ -76,6 +74,7 @@ const Home = () => {
     }
 
   }, []);
+  
   const handleScale = () => {
     setScaleCursor(true);
   };
@@ -91,11 +90,6 @@ const Home = () => {
         top: `${e.clientY}px`,
         duration: 0.7,
       });
-
-      const X = e.clientX - window.innerWidth / 2;
-      const Y = e.clientY - window.innerHeight / 2;
-      const angle = Math.atan2(Y, X) * (180 / Math.PI);
-      setRotate(angle - 180);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -133,19 +127,19 @@ const Home = () => {
           <img src={tree[2]} alt="Third branch" />
         </div>
         <div className="center">
-          <h1 ref={textRef1} >GET</h1>
+          <h1 ref={textRef1}>GET</h1>
           <h1 ref={textRef2} onMouseEnter={handleScale} onMouseLeave={dishandleScale}>APPOINTMENT</h1>
         </div>
         <div className="center-overlay">
-          <h1 ref={textRef3}  onMouseEnter={handleScale} onMouseLeave={dishandleScale}>GET</h1>
-          <h1 ref={textRef4}  onMouseEnter={handleScale} onMouseLeave={dishandleScale}>APPOINTMENT</h1>
+          <h1 ref={textRef3} onMouseEnter={handleScale} onMouseLeave={dishandleScale}>GET</h1>
+          <h1 ref={textRef4} onMouseEnter={handleScale} onMouseLeave={dishandleScale}>APPOINTMENT</h1>
         </div>
       </div>
-      <div className="cursor" style={{scale:scaleCursor?'2':'1'}}></div>
+      <div className="cursor" style={{ scale: scaleCursor ? '2' : '1' }}></div>
       <div className="custom-cursor" ref={cursorRef}></div>
       <MRI />
       <Location />
-      <Createacc />
+      {!islogin && <Createacc />}
       <Footer />
     </div>
   );

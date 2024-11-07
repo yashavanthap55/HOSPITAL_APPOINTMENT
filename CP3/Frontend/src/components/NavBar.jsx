@@ -1,12 +1,20 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef,useContext } from 'react'
 import './../styles/NavBar.css'
-import {NavLink} from 'react-router-dom'
+import {NavLink,useNavigate} from 'react-router-dom'
 import gsap from 'gsap';
-
+import { Appcontext } from '../context/Appcontext';
 
 
 const NavBar = () => {
+  const navigate=useNavigate();
  const NavRef=useRef(null);
+ const { islogin, Setislogin } = useContext(Appcontext);
+ const handleSignOut=()=>{
+  localStorage.removeItem('token');
+  Setislogin(false);
+  navigate('/');
+ };
+
  useEffect(() => {
   if (NavRef.current) {
     gsap.fromTo(
@@ -31,18 +39,15 @@ const NavBar = () => {
           <li>Doctors</li>
           <li>Doctors</li>
         </NavLink>
-        <NavLink to='/about' style={{textDecoration:'none'}}>
+        <NavLink to='/appointments' style={{textDecoration:'none'}}>
           <li>Appointments</li>
           <li>Appointments</li>
-        </NavLink>
-        <NavLink to='/contact' style={{textDecoration:'none'}}>
-          <li>Contacts</li>
-          <li>Contacts</li>
         </NavLink>
        </ul>
       </div>
       <div className="prof">
-        <NavLink to='/login'><li>Sign in/log in</li></NavLink>
+        <NavLink to='/login'><li style={{display:islogin?'none':''}}>Sign in/log in</li></NavLink>
+        <li style={{display:islogin?'':'none'}} onClick={handleSignOut}>Sign Out</li>
       </div>
     </div>
   )

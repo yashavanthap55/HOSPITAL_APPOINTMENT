@@ -9,7 +9,7 @@
     background: radial-gradient(var(--background--),#509857);
     overflow-x: hidden;
     cursor: none;
-    z-index: 28;
+    z-index: 27;
 }
 .firstbranch{
     height: 40%;
@@ -17,7 +17,7 @@
     position: absolute; 
     transform-origin: left;
     top: -30vh;
-    z-index: 31;
+    z-index: 35;
     animation: wave2 infinite 20s ease-in-out 1.8s;
  }
  img{

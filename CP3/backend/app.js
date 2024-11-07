@@ -1,62 +1,90 @@
-
+require('dotenv').config();
 const express = require('express');
-const mysql = require('mysql2');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
+const pool = require("./dataBase/Sql");
 const app = express();
-const PORT = 5173;
+const PORT = process.env.PORT;
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.CORS_ORIGIN,
+  methods: ['GET', 'POST'],
+}));
+
 app.use(bodyParser.json());
 
-const db = mysql.createConnection({
-  host: 'localhost', // Change as needed
-  user: 'root', // MySQL username
-  password: 'y18a07s25hu', // MySQL password
-  database: 'login'
-});
-
-db.connect((err) => {
-  if (err) throw err;
-  console.log('Connected to MySQL');
-});
-
-// Register endpoint
 app.post('/signup', async (req, res) => {
   const { username, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
-
-  db.query(
-    'INSERT INTO users (username, password) VALUES (?, ?)',
-    [username, hashedPassword],
-    (err, result) => {
-      if (err) return res.status(400).json({ error: 'Username already exists' });
-      res.json({ message: 'Sign Up Successful!' });
-    }
-  );
+  try {
+    await pool.query(
+      'INSERT INTO LOGIN (username, password) VALUES (?, ?)',
+      [username, hashedPassword]
+    );
+    res.json({ message: 'Sign Up Successful!' });
+  } catch (err) {
+    res.status(400).json({ error: 'Username already exists' });
+  }
 });
 
-// Login endpoint
-app.post('/login', (req, res) => {
-  const { username, password } = req.body;
+app.get('/patients', async (req, res) => {
+  try {
+    const [results] = await pool.query('SELECT * FROM patients ORDER BY date ASC,time ASC');
+    res.json(results);
+  } catch (err) {
+    console.error('Error fetching patients:', err);
+    res.status(500).json({ error: 'Database query error' });
+  }
+});
 
-  db.query('SELECT * FROM users WHERE username = ?', [username], async (err, results) => {
-    if (err || results.length === 0) {
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).json({ error: 'Username and password are required.' });
+  }
+
+  try {
+    const [results] = await pool.query('SELECT * FROM LOGIN WHERE username = ?', [username]);
+    if (results.length === 0) {
       return res.status(400).json({ error: 'Invalid credentials' });
     }
     const user = results[0];
-
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(400).json({ error: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ id: user.id }, 'your_jwt_secret', { expiresIn: '1h' });
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.json({ message: 'Login Successful!', token });
-  });
+  } catch (err) {
+    return res.status(500).json({ error: 'Database query error' });
+  }
+});
+
+app.post('/getappointment', async (req, res) => {
+  const { name, age, gender, address, doctor, date, time } = req.body;
+
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  if (!date || !date.match(dateRegex)) {
+    return res.status(400).json({ error: 'Invalid date format. Use YYYY-MM-DD.' });
+  }
+
+  const timeRegex = /^([01]?[0-9]|2[0-3]):([0-5][0-9])$/;
+  if (!time || !time.match(timeRegex)) {
+    return res.status(400).json({ error: 'Invalid time format. Use HH:mm.' });
+  }
+
+  try {
+    const [results] = await pool.query(
+      'INSERT INTO patients(name, age, gender, address, doctor, date, time) VALUES(?, ?, ?, ?, ?, ?, ?)',
+      [name, age, gender, address, doctor, date, time]
+    );
+    res.json({ message: 'Appointment created successfully!' });
+  } catch (e) {
+    return res.status(500).json({ error: 'Database query error' });
+  }
 });
 
 app.listen(PORT, () => {

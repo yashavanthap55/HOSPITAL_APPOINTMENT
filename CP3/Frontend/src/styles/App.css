@@ -5,6 +5,7 @@
 }
 html , body{
     overflow-x: hidden;
+    background: radial-gradient(var(--background--), #509857);
 }
 :root{
     --primary_green--:#0f5121;

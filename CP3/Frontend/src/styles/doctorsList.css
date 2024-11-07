@@ -4,6 +4,7 @@
     height: 300vh;
     background: radial-gradient(var(--background--),#509857);
     padding: 18vh 15vh 0vh;
+    font-family: 'Ubuntu';
 }
 .special{
     width: 70%;
