@@ -7,9 +7,9 @@ const Appointment = () => {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const response = await fetch('http://localhost:3000/patients');
+        const response = await fetch('http://localhost:3000/appointments');
         const data = await response.json();
-        setPatients(data); // Store the data in state
+        setPatients(data);
       } catch (error) {
         console.error('Error fetching patient data:', error);
       }

@@ -11,6 +11,7 @@ import './styles/App.css'
 
 
 const App = () => {
+  
   return (
     <>
     <Navbar/>

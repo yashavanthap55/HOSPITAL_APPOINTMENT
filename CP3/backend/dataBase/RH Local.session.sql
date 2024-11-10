@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS patients (
     gender ENUM('M', 'F', 'Other'),
     address VARCHAR(255)
 );
+
 CREATE TABLE LOGIN(
     username VARCHAR(20);
     password VARCHAR(120);
@@ -15,3 +16,4 @@ CREATE TABLE LOGIN(
 
 SELECT * FROM patients;
 SELECT * FROM LOGIN;
+

@@ -15,7 +15,7 @@ const Location = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             gsap.fromTo(
-              rightRef.current, // Use the ref to access the DOM element
+              rightRef.current, 
               { width: '0%' },
               { width: '60%', duration: 1,ease: "circ.out" }
             );

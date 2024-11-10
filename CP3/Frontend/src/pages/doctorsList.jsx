@@ -25,6 +25,7 @@ const DoctorsList = () => {
     applyFilter();
   }, [doctors, speciality]);  
 
+
   return (
     <div className='doctorsList'>
       <p style={{ color: 'var(--primary_green--)', fontSize: '1.5vw' }}>Browse through the doctors specialist</p>
