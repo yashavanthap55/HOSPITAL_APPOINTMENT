@@ -7,6 +7,7 @@ import { AmbientLight, DirectionalLight } from 'three';
 import { log, rotate } from 'three/webgpu';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import bed from './../assets/bed_img.jpeg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -141,7 +142,6 @@ const MRI = () => {
     <div className="MRI" id='MRI' ref={mriRef}>
       <svg 
         id="wave" 
-        style={{ transition: '0.3s', position: 'absolute', width: '100%', top: '-50vh', left: '0' }} 
         viewBox="0 20 1440 490" 
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -189,6 +189,9 @@ const MRI = () => {
     filter="url(#inner-shadow)"  // Apply inner shadow filter
   />
 </svg>
+ </div>
+ <div className="bed-img">
+  <img src={bed} alt="" />
  </div>
  <div className="righttext">
  <ul >

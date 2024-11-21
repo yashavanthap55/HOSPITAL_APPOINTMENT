@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');.MRI{
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+.MRI{
     position: relative;
     background-color: #2E8B57;
     width: 100vw;
@@ -7,8 +8,13 @@
     border-bottom-right-radius: 20%;
     cursor: default;
 }
-.MRI svg{
+#wave{
     z-index: 28;
+    position: absolute;
+    transition: 0.3s;
+    width: 100%;
+    top: -50vh;
+    left: 0;
 }
 .svgback{
     width: 50%;
@@ -31,7 +37,7 @@
     left: 50%;
     top: -35vh;
     text-wrap: nowrap;
-    padding:0vh 8vh;
+    padding:0vh 4vw;
 }
 .righttext ul li{
     font-family: "Poppins", sans-serif;
@@ -53,4 +59,28 @@
     top: 0vw;
     transition: 1s ease-out;
   }
-  
+  .bed-img{
+    display: none;
+  }
+@media (max-width:760px) and (min-width:400px){
+ .righttext{
+    top: -15vw;
+ }
+ .svgback{
+   top:35vw;
+ }
+ .container3D{
+    display: none;
+ }
+ .left{
+    display: none;
+ }
+ .bed-img{
+ display: block;
+ position: absolute ;
+ transform:rotateY(180deg);
+ width:300px;
+ height: 300px;
+ top: 255px;
+ }
+}

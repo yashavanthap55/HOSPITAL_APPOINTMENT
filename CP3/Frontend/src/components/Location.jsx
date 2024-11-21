@@ -38,7 +38,7 @@ const Location = () => {
 
   return (
     <div className='Location' id='Location'>
-      <div className="right" ref={rightRef}> {/* Attach the ref here */}
+      <div className="right" ref={rightRef}>
         <a href="https://maps.app.goo.gl/FnhgSDz2CV3ye6ty5" target='_blank' rel="noopener noreferrer">
           <img src={loc} alt="Location" />
         </a>

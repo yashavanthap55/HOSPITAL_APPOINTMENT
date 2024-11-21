@@ -16,6 +16,7 @@
 }
 .special:hover :not(:hover){
 opacity: 0.5;
+filter: blur(.9px);
 }
 .special p{
     border: 2px solid green;
