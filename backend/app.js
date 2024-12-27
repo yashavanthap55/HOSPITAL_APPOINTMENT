@@ -11,10 +11,19 @@ app.use(cors({
   origin: process.env.CORS_ORIGIN,
   methods: ['GET', 'POST'],
 }));
-
 app.use(bodyParser.json());
 
-app.post('/signup', async (req, res) => {
+async function checkMySQLConnection() {
+  try {
+    await pool.query('SELECT 1');
+    return 'Connected';
+  } catch (error) {
+    console.error('Error connecting to MySQL:', error);
+    return 'Failed';
+  }
+}
+
+app.post('https://hospital-appointment-jvy6.onrender.com/signup', async (req, res) => {
   const { username, password } = req.body;
   try {
     await pool.query(
@@ -27,17 +36,17 @@ app.post('/signup', async (req, res) => {
   }
 });
 
-app.get('/appointments', async (req, res) => {
+app.get('https://hospital-appointment-jvy6.onrender.com/appointments', async (req, res) => {
   try {
     const [results] = await pool.query('SELECT * FROM patients ORDER BY date ASC, time ASC');
-    res.json(results);  
+    res.json(results);
   } catch (err) {
     console.error('Error fetching patients:', err);
     res.status(500).json({ error: 'Database query error' });
   }
 });
 
-app.post('/login', async (req, res) => {
+app.post('https://hospital-appointment-jvy6.onrender.com/login', async (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).json({ error: 'Username and password are required.' });
@@ -57,7 +66,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.post('/getappointment', async (req, res) => {
+app.post('https://hospital-appointment-jvy6.onrender.com/getappointment', async (req, res) => {
   const { name, age, gender, address, doctor, date, time } = req.body;
   try {
     const [results] = await pool.query(
@@ -70,6 +79,9 @@ app.post('/getappointment', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+
+app.listen(PORT, async () => {
+  const dbStatus = await checkMySQLConnection();
+  console.log(`MySQL Status: ${dbStatus}`);
   console.log(`Server running on http://localhost:${PORT}`);
 });
