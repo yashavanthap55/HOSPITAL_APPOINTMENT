@@ -48,7 +48,7 @@ const Appointment = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="6">No patients found</td>
+                <td colSpan="6">SQL connection lost</td>
               </tr>
             )}
           </tbody>
