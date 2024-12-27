@@ -5,8 +5,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "build": "node ./node_modules/vite/bin/vite.js build",
+    "dev": "node ./node_modules/vite/bin/vite.js",
     "start": "vite preview",
     "backend": "node app.js",
     "full-start": "concurrently \"npm run dev\" \"npm run backend\"",
