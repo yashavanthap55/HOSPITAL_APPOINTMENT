@@ -7,7 +7,7 @@ const Appointment = () => {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const response = await fetch('http://localhost:3000/appointments');
+        const response = await fetch('https://hospital-appointment-jvy6.onrender.com/appointments');
         const data = await response.json();
         setPatients(data);
       } catch (error) {

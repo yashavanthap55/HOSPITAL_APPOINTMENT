@@ -27,7 +27,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/signup", {
+      const response = await axios.post("https://hospital-appointment-jvy6.onrender.com/signup", {
         username: formData.username,
         password: formData.password
       });
