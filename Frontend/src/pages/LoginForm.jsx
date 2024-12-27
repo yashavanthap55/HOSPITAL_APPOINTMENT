@@ -45,7 +45,7 @@ const LoginForm = ({ toggleForm }) => {
       }
     } catch (error) {
       console.error("Submission error:", error);
-      setErrorMessage("Login failed.");
+      setErrorMessage("SQL lost");
     }
   };
 
