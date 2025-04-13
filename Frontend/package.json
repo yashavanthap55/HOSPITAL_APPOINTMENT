@@ -1,17 +1,18 @@
 {
   "name": "cp2",
-  "homepage": "https://yashavanthap55.github.io/HOSPITAL_APPOINTMENT",
+  "homepage": "https://yashavanthap55.github.io/Hospital_appointment",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "build": "node ./node_modules/vite/bin/vite.js build",
     "dev": "node ./node_modules/vite/bin/vite.js",
+    "predeploy":"npm run build",
     "start": "vite preview",
     "backend": "node app.js",
     "full-start": "concurrently \"npm run dev\" \"npm run backend\"",
     "lint": "eslint .",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
