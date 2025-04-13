@@ -37,7 +37,7 @@ const LoginForm = ({ toggleForm }) => {
           setSuccessMessage("Login successful! Redirecting...");
           Setislogin(true);
           setTimeout(() => {
-            navigate("/");
+            navigate("/Hospital_appointment");
           }, 1000);
         }
       } else {
