@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import Location from './Location';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { AmbientLight, DirectionalLight } from 'three';
+import { log, rotate } from 'three/webgpu';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 

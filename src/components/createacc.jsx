@@ -1,7 +1,7 @@
 import React from 'react';
-import './../assets/assets_frontend/assets.js'
+import '../assets/assets_frontend/assets.js'
 import {useNavigate} from 'react-router-dom'
-import { assets } from './../assets/assets_frontend/assets.js';
+import { assets } from '../assets/assets_frontend/assets.js';
 
 const createacc = () => {
   const navigate=useNavigate();
