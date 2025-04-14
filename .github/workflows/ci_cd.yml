@@ -54,8 +54,11 @@ jobs:
       - name: Set Git identity
         run: |
           git config --global user.email "yashavanthap.btech23@gmail.com"
-          git config --global user.name "Yashavantha P"
+          git config --global user.name "yashavanthap55"
       
       - name: Deploy to GitHub Pages
         run: npm run deploy
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      
       
