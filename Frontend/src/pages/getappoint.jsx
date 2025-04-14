@@ -37,7 +37,7 @@ const GetAppointment = () => {
     if (!isFormValid) return;
 
     try {
-      const response = await axios.post("https://hospital-appointment-jvy6.onrender.com/getappointment", {
+      const response = await axios.post("https://hospital-back-host.onrender.com/getappointment", {
         name: formData.name,
         age: formData.age,
         gender: formData.gender,
