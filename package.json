@@ -10,7 +10,7 @@
     "start": "vite preview",
     "full-start": "concurrently \"npm run dev\" \"npm run backend\"",
     "lint": "echo 'Lint Passed!'",
-    "deploy": "node ./node_modules/gh-pages/bin/gh-pages.js -d dist",
+    "deploy": "gh-pages -d dist -u \"yashavanthap55 <yashavanthap.btech23@gmail.com>\" -r https://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@github.com/Yashavanthap55/HOSPITAL_APPOINTMENT.git",
     "vitestd": "echo 'ViTest Passes succesfully!'",
     "test": "echo 'Test 1: Unit Test - Passed!' && echo 'Test 2: Integration Test - Passed!' && echo 'Test 3: Code Coverage - Passed!' && echo 'Test 4: Acceptance Test - Passed!' && echo 'Test 5: Usability Test - Passed!' && echo 'Test 6: Performance Test - Passed!' && echo 'All tests completed!'"
   },
