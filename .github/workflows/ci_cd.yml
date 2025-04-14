@@ -51,5 +51,11 @@ jobs:
       - name: Build Vite frontend
         run: npm run build
 
+      - name: Set Git identity
+        run: |
+          git config --global user.email "yashavanthap.btech23@gmail.com"
+          git config --global user.name "Yashavantha P"
+      
       - name: Deploy to GitHub Pages
         run: npm run deploy
+      
