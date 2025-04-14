@@ -26,7 +26,7 @@ const LoginForm = ({ toggleForm }) => {
     }
 
     try {
-      const response = await axios.post("https://hospital-appointment-jvy6.onrender.com/login", {
+      const response = await axios.post("https://hospital-back-host.onrender.com/login", {
         username: formData.username,
         password: formData.password
       });
